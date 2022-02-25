@@ -1,6 +1,7 @@
 import urllib.request
 import requests
 from tkinter import *
+import time
 from tkinter.messagebox import *
 import os
 import shutil
@@ -31,6 +32,11 @@ def save_img():
    count += 1
    filename = f"data/{count}.jpeg"
    urllib.request.urlretrieve(Url, filename)
+   img = PhotoImage(f"data/{count}.jpeg")
+   image_label = Label(image=img)
+   image_label.pack(pady=10)
+   time.sleep(15)
+   image_label.destroy()
 heading = Label(root, text="Mars Mission! To the moon", font=("helvetica", 30))
 heading.pack(pady=10)
 def main_tab():
@@ -99,6 +105,4 @@ def result_tab():
    go_back_btn.pack(pady=10)
 main_tab()
 root.mainloop()
-
-
 
