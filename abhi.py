@@ -1,1 +1,0 @@
-listbox = Listbox(inner_frame, width=35, height=15, font=("aharoni", 10))
