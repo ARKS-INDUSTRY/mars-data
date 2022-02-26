@@ -5,6 +5,7 @@ import time
 from tkinter.messagebox import *
 import os
 import shutil
+from PIL import ImageTk, Image
 api = "pIrdFhGHvCOBVwFYeOXvw5PFAxBAUZN2zyCPhPfY"
 base_url = "https://api.nasa.gov/mars-photos/api/v1/rovers"
 root = Tk()
@@ -32,12 +33,15 @@ def save_img():
    count += 1
    filename = f"data/{count}.jpeg"
    urllib.request.urlretrieve(Url, filename)
-   img = PhotoImage(f"data/{count}.jpeg")
-   image_label = Label(image=img)
-   image_label.pack(pady=10)
+   photo = Tk()
+   photo.geometry("300x300")
+   photo.title("mars mission")
+   img = PhotoImage(filename)
+   image_label = Label(photo,image=filename)
+   image_label.pack(pady=10) 
    time.sleep(15)
-   image_label.destroy()
-heading = Label(root, text="Mars Mission! To the moon", font=("helvetica", 30))
+   photo.destroy()
+heading = Label(root, text="Mars Mission! To the mars", font=("helvetica", 30))
 heading.pack(pady=10)
 def main_tab():
    global sol, default_rover, default_cam, sol_entry, main_frame, label_rover, cam_selection, sol_label, rover_selection, get_data_btn
@@ -91,7 +95,7 @@ def result_tab():
    data_list = mars_images(rover, cam, sol)
    l = len(data_list)
    if l == 0:
-      showerror("invalid sol", "the entered sol is not proper")
+      showerror("invalid sol", "the entered sol is not proper \nno data available on this sol")
    else:
       pass
    listbox = Listbox(root, width=55, height=15, font=("aharoni", 10))
